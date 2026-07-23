@@ -30,7 +30,7 @@ const generalSans = localFont({
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  title: "Mark Guanez — Full Stack Developer",
+  title: "~/AMMG · Full Stack Developer",
   description:
     "Portfolio of Mark Guanez. Modern, fast, and reliable web experiences — built with care.",
 };
