@@ -1,0 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #edeef1;
+  --bg-surface: radial-gradient(ellipse 120% 80% at 50% 20%, #f7f7fa 0%, #e4e5ea 50%, #dddde4 100%);
+  --bg-secondary: #e6e6eb;
+  --bg-secondary-surface: radial-gradient(ellipse 100% 100% at 50% 80%, #eeeef2 0%, #e0e0e8 100%);
+  --fg: #0a0a0f;
+  --fg-secondary: #1a1a24;
+  --fg-muted: rgba(10, 10, 15, 0.6);
+  --fg-faint: rgba(10, 10, 15, 0.4);
+  --fg-ghost: rgba(10, 10, 15, 0.1);
+  --border: rgba(10, 10, 15, 0.15);
+  --accent: #10b981;
+  --accent-rgb: 16 185 129;
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  --code-grid-dot: rgba(16, 185, 129, 0.18);
+  --code-watermark: rgba(16, 185, 129, 0.06);
+  --ink: #f0f0f0;
+  --gradient-heading: radial-gradient(ellipse 80% 60% at 50% 40%, #0a0a0f 40%, #22222e 100%);
+  --gradient-subheading: radial-gradient(ellipse 90% 80% at 40% 50%, rgba(10,10,15,0.6) 0%, rgba(10,10,15,0.35) 100%);
+  --orb-1: rgba(16, 185, 129, 0.15);
+  --orb-2: rgba(59, 130, 246, 0.12);
+  --font-sans: var(--font-general), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-clash), ui-sans-serif, system-ui;
+  --gh-empty: rgba(10, 10, 15, 0.08);
+  --dock-bg-rgb: 237 238 241;
+  /* Hero glass cards — light surface, dark-green glow */
+  --card-bg: rgba(247, 248, 250, 0.9);
+  --card-border: rgba(16, 185, 129, 0.3);
+  --card-glow: 0 14px 44px -8px rgba(16, 185, 129, 0.35), 0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+.dark {
+  --bg: #08090b;
+  --bg-surface: radial-gradient(ellipse 120% 80% at 50% 20%, #0f1117 0%, #08090b 50%, #060709 100%);
+  --bg-secondary: #0b0d10;
+  --bg-secondary-surface: radial-gradient(ellipse 100% 100% at 50% 80%, #0e1015 0%, #08090b 100%);
+  --fg: #e8eaed;
+  --fg-secondary: #c4c7cc;
+  --fg-muted: rgba(232, 234, 237, 0.5);
+  --fg-faint: rgba(232, 234, 237, 0.22);
+  --fg-ghost: rgba(232, 234, 237, 0.07);
+  --border: rgba(232, 234, 237, 0.1);
+  --accent: #7cf5c4;
+  --accent-rgb: 124 245 196;
+  --accent-glow: rgba(124, 245, 196, 0.15);
+  --code-grid-dot: rgba(124, 245, 196, 0.07);
+  --code-watermark: rgba(124, 245, 196, 0.04);
+  --ink: #0a0a0a;
+  --gradient-heading: radial-gradient(ellipse 80% 60% at 50% 40%, #e8eaed 40%, #9ba1ab 100%);
+  --gradient-subheading: radial-gradient(ellipse 90% 80% at 40% 50%, rgba(232,234,237,0.5) 0%, rgba(155,161,171,0.3) 100%);
+  --orb-1: rgba(124, 245, 196, 0.25);
+  --orb-2: rgba(124, 180, 245, 0.2);
+  --gh-empty: rgba(232, 234, 237, 0.08);
+  --dock-bg-rgb: 11 13 16;
+  /* Hero glass cards — dark surface, light-green glow */
+  --card-bg: rgba(13, 16, 20, 0.9);
+  --card-border: rgba(124, 245, 196, 0.24);
+  --card-glow: 0 14px 44px -8px rgba(124, 245, 196, 0.28), 0 0 0 1px rgba(124, 245, 196, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-surface);
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide native cursor while simulation is active */
+.sim-active,
+.sim-active * {
+  cursor: none !important;
+}
+
+/* Subtle grain */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--fg-ghost) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* Hero glass cards — themed surface + accent glow for legibility over the name/photo */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-glow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Display headline tightening */
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+  font-weight: 600;
+}
+
+/* Aurora drift for intro background — GPU-composited, no layout cost */
+@keyframes aurora {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  100% {
+    transform: translate(5%, -3%) scale(1.05);
+  }
+}
+
+/* 3D Perspective Grid — Phantom.land-inspired */
+.grid-perspective-wrapper {
+  perspective: 600px;
+  perspective-origin: 50% 50%;
+  overflow: visible;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0;
+  height: 100vh;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 1399px) and (min-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .grid-perspective-wrapper {
+    perspective: none;
+  }
+
+  .preserve-3d {
+    transform: none !important;
+  }
+}
+
+/* Subtle dot-grid background — dev/blueprint feel */
+.code-grid {
+  background-image:
+    radial-gradient(circle, var(--code-grid-dot) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0;
+}
+
+/* Faint code syntax watermark fragments */
+.code-watermark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  font-family: var(--font-mono);
+  color: var(--code-watermark);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  white-space: pre;
+  user-select: none;
+  line-height: 1.8;
+}
+
+/* Modern radial gradient text — non-linear, organic feel */
+.text-gradient {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* keep italic / slanted glyphs from being shaved by the clip box */
+  display: inline-block;
+  padding-right: 0.12em;
+  margin-right: -0.12em;
+}
+
+.text-gradient-muted {
+  background: var(--gradient-subheading);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* keep italic / slanted glyphs from being shaved by the clip box */
+  display: inline-block;
+  padding-right: 0.12em;
+  margin-right: -0.12em;
+}
+
+/* Cosmos-style orbiting rings */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes counter-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes counter-orbit-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR — Tier 1
+   Thin, themed, accent-glow on hover
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent-rgb) / 0.35) transparent;
+}
+
+/* Webkit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb) / 0.25);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--accent-rgb) / 0.5);
+  border: 1px solid transparent;
+  background-clip: content-box;
+  box-shadow: 0 0 8px rgba(var(--accent-rgb) / 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(var(--accent-rgb) / 0.7);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Hide scrollbar when not scrolling (auto-hide feel via opacity on body) */
+html {
+  overflow-y: scroll;
+  /* Kill any horizontal overflow so fixed bars (mobile top nav) never clip */
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LENIS SMOOTH SCROLL — Tier 3
+   ═══════════════════════════════════════════════════════════════ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL VARIANTS — Tier 2
+   ═══════════════════════════════════════════════════════════════ */
+.reveal-mask {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-mask.revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Glow trail effect for progress bar */
+.progress-glow {
+  box-shadow:
+    0 0 8px rgba(var(--accent-rgb) / 0.4),
+    0 0 20px rgba(var(--accent-rgb) / 0.2),
+    0 0 40px rgba(var(--accent-rgb) / 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
