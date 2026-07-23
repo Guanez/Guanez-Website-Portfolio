@@ -60,7 +60,7 @@ export default function MobileNav() {
       {/* Full-width top bar — logo left, Book a Call + hamburger right */}
       <div className="fixed inset-x-0 top-0 z-[60] flex items-center justify-between px-5 py-4">
         <span className="font-mono text-lg font-bold tracking-tighter text-[var(--fg)]">
-          <span className="text-accent">~</span>/ammg
+          <span className="text-accent">~</span>/ammg<span className="terminal-cursor" aria-hidden="true" />
         </span>
         <div className="flex items-center gap-2">
           <button
@@ -91,7 +91,7 @@ export default function MobileNav() {
             {/* Top bar inside the menu */}
             <div className="flex items-center justify-between px-6 py-5">
               <span className="font-mono text-lg font-bold tracking-tighter">
-                <span className="text-accent">~</span>/ammg
+                <span className="text-accent">~</span>/ammg<span className="terminal-cursor" aria-hidden="true" />
               </span>
               <div className="flex items-center gap-2">
                 <button

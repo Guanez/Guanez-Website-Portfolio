@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <style>
-    .g { stroke: #0d1512; opacity: .42; }
+    .g { stroke: #0d1512; opacity: .55; }
     .m { stroke: #10b981; }
     @media (prefers-color-scheme: dark) {
-      .g { stroke: #e8f0ed; opacity: .38; }
+      .g { stroke: #e8f0ed; opacity: .5; }
       .m { stroke: #7cf5c4; }
     }
   </style>
-  <path class="g" d="M52 22 A22 22 0 1 0 52 42 L52 32 L40 32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="m" d="M15 47 L15 23 L30 40 L45 23 L45 47" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="g" d="M56 22 A20 20 0 1 0 56 42 L56 32 L44 32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="m" d="M12 46 L12 22 L26 38 L40 22 L40 46" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
