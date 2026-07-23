@@ -133,7 +133,7 @@ export default function HomeV2() {
       {/* Header — top bar with branding left, socials + theme right */}
       <header className="fixed top-0 w-full z-40 px-6 py-5 lg:px-12 hidden lg:flex justify-between items-center">
         <Link href="/" className="text-lg font-bold tracking-tighter hover:opacity-70 transition-opacity font-mono">
-          <span className="text-accent">~</span>/guanez
+          <span className="text-accent">~</span>/ammg
         </Link>
         <div className="hidden lg:flex items-center gap-4">
           {[
